@@ -2,9 +2,9 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-07-31 15:18:15
- * @LastEditTime: 2020-07-31 15:46:18
+ * @LastEditTime: 2020-08-05 16:24:23
  * @LastEditors: Do not edit
- * @FilePath: /nodejs/01/app.js
+ * @FilePath: /node学习/01/app.js
  */ 
 
 
@@ -54,11 +54,10 @@ const http  = require('http');
 
 // 步骤二、创建服务器
 http.createServer(function(requset,respone){
-
     // 发送 HTTP 头部 
     // HTTP 状态值: 200 : OK
     // 内容类型: text/plain
-    respone.writeHead(200,{'Content-Type':'text/plain'});
+    respone.writeHead(200,{'Content-Type':'text/html'});
 
      // 发送响应数据 "Hello Node-js"
     respone.end('Hello Node-js')
