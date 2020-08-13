@@ -1,0 +1,26 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-08-13 18:17:25
+ * @LastEditTime: 2020-08-13 18:26:19
+ * @LastEditors: Do not edit
+ * @FilePath: /node学习/06/views/login.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>ejs模板~~</h2>
+    <div> <%= msg %>  </div>
+    <h3>列表~~</h3>
+    <ul>
+        <% list.forEach(el => { %>
+            <li><%= el.title %></li>
+        <% }) %>
+    </ul>
+</body>
+</html>
