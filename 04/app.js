@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 路由
  * @Date: 2020-07-31 15:18:15
- * @LastEditTime: 2020-08-13 14:54:13
+ * @LastEditTime: 2020-08-13 17:02:03
  * @LastEditors: Do not edit
  * @FilePath: /node学习/04/app.js
  */ 
@@ -13,7 +13,6 @@
 */  
 const fs = require(`fs`);
 const path = require(`path`);
-const httpServer = require(`./server`);
 const common = require(`./module/common`);
 const http  = require('http');
 const url = require('url');
