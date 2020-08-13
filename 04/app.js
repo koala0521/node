@@ -2,30 +2,56 @@
  * @Author: XueBaBa
  * @Description: 路由
  * @Date: 2020-07-31 15:18:15
- * @LastEditTime: 2020-07-31 16:53:04
+ * @LastEditTime: 2020-08-13 14:54:13
  * @LastEditors: Do not edit
- * @FilePath: /nodejs/04/app.js
+ * @FilePath: /node学习/04/app.js
  */ 
 
 
 /*
-
-Node.js 路由
-    我们要为路由提供请求的 URL 和其他需要的 GET 及 POST 参数，随后路由需要根据这些数据来执行相应的代码。
-
-    因此，我们需要查看 HTTP 请求，从中提取出请求的 URL 以及 GET/POST 参数。
-    这一功能应当属于路由还是服务器（甚至作为一个模块自身的功能）确实值得探讨，但这里暂定其为我们的HTTP服务器的功能。
-
-    我们需要的所有数据都会包含在 request 对象中，该对象作为 onRequest() 回调函数的第一个参数传递。
-    但是为了解析这些数据，我们需要额外的 Node.JS 模块，它们分别是 url 和 querystring 模块。
     
 */  
-
+const fs = require(`fs`);
+const path = require(`path`);
 const httpServer = require(`./server`);
-const router = require('./router');
+const common = require(`./module/common`);
+const http  = require('http');
+const url = require('url');
 
 
-httpServer.start(router.route);
+// 步骤二、创建服务器
+http.createServer( async(request,respone)=>{
+    
+    let pathName = url.parse(request.url).pathname;
+    pathName = pathName === '/' ? '/index.html' : pathName;
+	let extname = path.extname(pathName);
+    let mime = await common.getfileMime(extname);
+    let data = await readFile(pathName);
+    
+    if( !data ){
+        console.log(`____404`);
+	    respone.writeHead( 404 ,{'Content-Type': 'text/html;charset="utf-8"'});
+        respone.end( `404 页面找不到了~~` );
+        return
+    }
+	respone.writeHead( 200 ,{'Content-Type': mime});
+	respone.end( data );
 
-// 使用 node 命令执行以上的代码： ndoe app.js
+}).listen(3001);
 
+console.log('Server running at http://127.0.0.1:3001/');
+
+function readFile(pathName){
+
+	return new Promise((resolve,reject)=>{
+		
+		fs.readFile( `./static${ pathName }` ,(err,data)=>{
+			if(err){
+				resolve(false)
+				return
+			}
+			resolve(data.toString())
+		});			
+	})
+
+}
