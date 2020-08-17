@@ -2,17 +2,17 @@
  * @Author: XueBaBa
  * @Description: express 路由封装 02
  * @Date: 2020-07-31 16:11:54
- * @LastEditTime: 2020-08-17 15:22:15
+ * @LastEditTime: 2020-08-17 16:01:14
  * @LastEditors: Do not edit
  * @FilePath: /node学习/10/module/router.js
  */
 
-const fs = require(`fs`);
-const path = require(`path`);
-const common = require(`../common/common`);
-const http = require('http');
+// const fs = require(`fs`);
+// const path = require(`path`);
+// const common = require(`../common/common`);
+// const http = require('http');
+// const ejs = require(`ejs`);
 const url = require('url');
-const ejs = require(`ejs`);
 
 
 let server = function(){
@@ -38,12 +38,12 @@ let server = function(){
 	   changeRes(res);
 		
 		//  get请求处理
-		if(G._get[pathname]  ){  
+		if( method === 'get' && G._get[pathname] ){  
 			G._get[pathname](req,res);
 			return
 		}
 		// post 请求处理
-		if(G._post[pathname]){
+		if( method === 'post' && G._post[pathname]){
 
 			let postData = '';
 			
@@ -51,8 +51,9 @@ let server = function(){
 				postData+=chunk;
 			})
 			req.on('end',()=>{
-				console.log(`postData ____` , postData);
-				req.body = postData;
+
+				//  绑定回传数据
+				res.body = postData;
 				G._post[pathname](req,res);
 			})		
 				
@@ -66,8 +67,7 @@ let server = function(){
 	
 	app.get = function(str , cb){
 		console.log('app.get _____');
-	
-		// ?????
+
 		G._get[str] = cb;
 		
 	}

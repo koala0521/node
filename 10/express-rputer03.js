@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: node 路由封装 下
  * @Date: 2020-07-31 15:18:15
- * @LastEditTime: 2020-08-17 15:21:45
+ * @LastEditTime: 2020-08-17 15:54:45
  * @LastEditors: Do not edit
  * @FilePath: /node学习/10/express-rputer03.js
  */ 
@@ -43,6 +43,8 @@ app.get('/news',(req,res)=>{
 	
 });
 
-app.post('/doLogin',(req,res)=>{
-	res.send(req.body);
+app.post('/login',(req,res)=>{
+	console.log('post ____' , res.body);
+	
+	res.send(res.body);
 })
