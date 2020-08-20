@@ -1,0 +1,28 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-08-20 17:01:55
+ * @LastEditTime: 2020-08-20 17:46:48
+ * @LastEditors: Do not edit
+ * @FilePath: /express/11/views/admin/add.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/admin/user/doAdd" method="post" enctype="multipart/form-data">
+        <h3>文件上传</h3>
+        <input type="file" value="文件上传" name="img" />
+        <h3>简介</h3>
+        <textarea name="info" id="info" cols="30" rows="10"></textarea>
+        <div>
+            <input type="submit" value="提交" />
+        </div>
+    </form>
+
+</body>
+</html>
