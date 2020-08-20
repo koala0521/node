@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description:  express 中间件 - 第三方中间件
  * @Date: 2020-08-19 11:58:10
- * @LastEditTime: 2020-08-19 17:44:23
+ * @LastEditTime: 2020-08-20 10:57:21
  * @LastEditors: Do not edit
  * @FilePath: /express/06/app.js
  */
@@ -44,12 +44,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
 app.get("/login",(req,res)=>{
     // req.query  获取 get 传值 
     res.render("login");
 })
-
 
 app.post("/doLogin",(req,res)=>{
     let body = req.body;
@@ -64,7 +62,7 @@ app.use((req,res,next)=>{
 })
 
 app.listen(port,()=>{
-    console.log('server listen on port',port);
+    console.log(`server listen on port localhost:${port}/`);
     
 })
 
