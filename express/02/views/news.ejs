@@ -1,0 +1,27 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-08-19 15:25:52
+ * @LastEditTime: 2020-08-19 15:28:49
+ * @LastEditors: Do not edit
+ * @FilePath: /express/02/views/news.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>news页面</h3>
+    <ul>
+        <% list.forEach(el => { %>
+         <li> <%=  el %>  </li>
+        <% }) %>
+    </ul>
+
+    <!-- 使用 include 引入公用模板-->
+    <%-  include('footer.ejs')  %> 
+</body>
+</html>

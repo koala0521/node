@@ -1,0 +1,29 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-08-19 14:40:31
+ * @LastEditTime: 2020-08-19 16:04:28
+ * @LastEditors: Do not edit
+ * @FilePath: /express/03/views/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>ejs 模板渲染 .html</h3> 
+    <!-- 输出字符串，不解析 -->
+    <div><%= title %> </div>
+    <!-- 输出 html 标签，并解析 -->
+    <div><%- html %> </div>  
+    <div> <% if ( show ) { %>
+        <span>show=true</span>
+    <% } %> </div>
+
+    <!-- 使用 include 引入公用模板-->
+    <%-  include('footer.html')  %> 
+</body>
+</html>
