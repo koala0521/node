@@ -1,8 +1,8 @@
 /*
  * @Author: XueBaBa
- * @Description: 文件描述~
+ * @Description: 多文件上传处理
  * @Date: 2020-08-20 16:10:38
- * @LastEditTime: 2020-08-21 12:07:14
+ * @LastEditTime: 2020-08-21 12:10:21
  * @LastEditors: Do not edit
  * @FilePath: /express/13/router/admin/nav.js
  */
@@ -22,6 +22,7 @@ router.get("/edit",(req,res)=>{
     res.send("修改导航")
 })
 
+//  多文件上传处理
 router.post("/doAdd",tools.upload().fields([{name:'img1',maxCount:1},{name:'img2',maxCount:1}]),(req,res)=>{
     
     console.log('____',req.files);
