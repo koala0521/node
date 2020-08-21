@@ -1,0 +1,28 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-08-20 17:01:55
+ * @LastEditTime: 2020-08-21 12:02:51
+ * @LastEditors: Do not edit
+ * @FilePath: /express/13/views/admin/nav/add.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/admin/nav/doAdd" method="post" enctype="multipart/form-data">
+        <h3>多文件上传</h3>
+        <input type="file" value="文件上传" name="img1" />
+        <input type="file" value="文件上传" name="img2" />
+        <hr>
+        <div>
+            <input type="submit" value="提交" />
+        </div>
+    </form>
+
+</body>
+</html>
