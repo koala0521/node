@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: JS 设计模式 - 构造器模式 完美继承
  * @Date: 2020-09-03 11:03:38
- * @LastEditTime: 2020-09-03 16:22:47
+ * @LastEditTime: 2020-09-04 15:10:06
  * @LastEditors: Do not edit
  * @FilePath: /node学习/javascript设计模式/app-3-构造器模式&继承03.js
  */
@@ -57,3 +57,4 @@ let child2 = new Dog();
 
 
 child2.readArg();
+
