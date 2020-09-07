@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: JS 设计模式 - 工厂模式
  * @Date: 2020-09-03 11:03:38
- * @LastEditTime: 2020-09-07 12:09:27
+ * @LastEditTime: 2020-09-07 14:27:38
  * @LastEditors: Do not edit
  * @FilePath: /node学习/javascript设计模式/app-6-工厂模式.js
  */
@@ -43,8 +43,6 @@ function Animal(options){
 // 工厂
 
 function Factory(){}
-
-Factory.prototype.vehicleClass
 
 Factory.prototype.createVehicle = function (options){
     
