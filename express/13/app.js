@@ -2,17 +2,12 @@
  * @Author: XueBaBa
  * @Description:  express 文件上传 02
  * @Date: 2020-08-19 11:58:10
- * @LastEditTime: 2020-08-20 17:57:00
+ * @LastEditTime: 2020-09-09 14:43:51
  * @LastEditors: Do not edit
- * @FilePath: /express/12/app.js
+ * @FilePath: /node学习/express/13/app.js
  */
 
-
-/*
-    
-
-
-*/ 
+ /**/ 
 
 const express = require('express');
 const app = express();
@@ -26,11 +21,11 @@ const bodyParser = require('body-parser');
 
 
 const ejs = require("ejs");
-app.set("view engine","ejs")
+app.set("view engine","ejs");
 
 // 第三方中间 body-parser 件配置
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // app.use(session({

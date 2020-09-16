@@ -2,9 +2,9 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-08-19 11:58:10
- * @LastEditTime: 2020-08-19 12:23:36
+ * @LastEditTime: 2020-09-09 15:41:20
  * @LastEditors: Do not edit
- * @FilePath: /express/01/app.js
+ * @FilePath: /node学习/express/01/app.js
  */
 const express = require('express');
 
@@ -69,9 +69,6 @@ app.get("/porduct",(req,res)=>{
     res.send("get传参~~");
     
 })
-
-
-
 
 
 app.listen(3000,()=>{
