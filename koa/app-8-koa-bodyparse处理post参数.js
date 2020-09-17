@@ -1,8 +1,8 @@
 /*
  * @Author: XueBaBa
- * @Description: 执行流程 ~
+ * @Description: koa-bodyparser ~
  * @Date: 2020-09-15 10:56:12
- * @LastEditTime: 2020-09-17 12:30:21
+ * @LastEditTime: 2020-09-17 14:46:19
  * @LastEditors: Do not edit
  * @FilePath: /koa/app.js
  */
@@ -12,54 +12,38 @@ const views = require('koa-views');
 const path = require('path');
 const common = require('./module/common');
 const bodyParse = require('koa-bodyparser');
-
-
 const app = new Koa();
 const router = new Router();
-
-
 app.use(views( __dirname + '/views', { map: {html: 'ejs' }}));  
 
+
+//  koa-bodyparser  中间件的使用 。作用：处理 post 传参
 app.use(bodyParse());
 
-// 配置公共数据 ctx.state  公共数据可以在模板中直接使用，无需在render的时候传参
-app.use(async(ctx,next)=>{
-    
-    ctx.state.username = '张三';
-    await next();
+router.post('/doAdd', async(ctx,next)=>{
+
+    console.log('ctx.request.body' , ctx.request.body);
+    // 接收 post 参数
+    ctx.body = ctx.request.body;
 })
 
 
+
+
 router.get('/', async(ctx)=>{
-    
-
     await ctx.render('test');   // 渲染模板
-
 })
 
 
 router.get('/add',async (ctx)=>{
 
     let title = 'hello koa2';    
-
     // 渲染模板
     await ctx.render( 'index',{
-        title,
-        username: ctx.state.username
+        title
     })  
     
 })
-
-router.post('/doAdd', async(ctx,next)=>{
-
-    // let str =  await common.getDate(ctx);
-
-    console.log('ctx.request.body' , ctx.request.body);
-    
-    ctx.body = ctx.request.body;
-    // ctx.body = str;
-})
-
 
 // 错误处理中间件
 app.use(async(ctx,next)=>{
