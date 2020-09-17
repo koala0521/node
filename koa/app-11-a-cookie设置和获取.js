@@ -1,10 +1,10 @@
 /*
  * @Author: XueBaBa
- * @Description: session ~
+ * @Description: cookie ~
  * @Date: 2020-09-15 10:56:12
- * @LastEditTime: 2020-09-17 17:58:38
+ * @LastEditTime: 2020-09-17 18:01:08
  * @LastEditors: Do not edit
- * @FilePath: /koa/app.js
+ * @FilePath: /koa/app-11-cookie设置和获取.js
  */
 const Koa = require('koa');
 const Router = require('koa-router');
@@ -12,6 +12,7 @@ const path = require('path');
 const app = new Koa();
 const router = new Router();
 const render = require('koa-art-template');
+
 render( app, {
     root: path.join(__dirname, 'views'),
     extname: '.html',
@@ -20,49 +21,35 @@ render( app, {
 
 /**
  * 
- * session koa中 session 的使用
+ * cookie koa中cookie的设置和获取
  * 
  * */ 
-const session = require('koa-session');
-app.keys = ['some secret hurr'];  // cookie 的签名
-
-const CONFIG = {
-    key: 'koa.sess',
-    maxAge: 20*1000,
-    overwrite: true,
-    httpOnly: true,
-    signed: true,
-    rolling: true,   // 每次请求重置过期时间
-    renew: false,   // 请求时，如果session即将过期，重置过期时间
-};
-
-app.use(session(CONFIG, app));  // session 中间件
-
-
-
-
-
 router.get('/', async(ctx,next)=>{
 
-    // 设置 session
-    ctx.session.userinfo = '张三';
-
+    ctx.cookies.set('name','cookie: wangxiaoer',{
+        maxAge: 10000,
+        // domain: '',         // 可使用的域名、默认只在当前域下使用
+        // path: '',           // 可访问的页面
+        httpOnly: false,    // true 表示只有服务端可以获取cookie
+    });
     ctx.body = `首页`;
 })
 
 
 router.get('/news', async(ctx,next)=>{
 
-    // 获取session
-    let userinfo = ctx.session.userinfo;
+    let name = ctx.cookies.get('name');
     
-    console.log('userinfo___' , userinfo);
+    console.log('cookie' , name);
 
     await ctx.render('art_index',{
-        user: userinfo,
+        user: name,
         code: '<h4>哈哈哈</h4>'
     });
 })
+
+
+
 
 
 // 错误处理中间件
