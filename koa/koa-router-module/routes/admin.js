@@ -15,7 +15,7 @@ const router = require('koa-router')();
 const user = require('./admin/user');
 const focus = require('./admin/focus');
 
-router.get('/',(ctx)=>{
+router.get('/',async(ctx)=>{
 
     // ctx.body = `后台首页~~`
     ctx.render('admin/index');

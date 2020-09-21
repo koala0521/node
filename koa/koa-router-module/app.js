@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: koa - 路由模块化~
  * @Date: 2020-09-21 16:09:16
- * @LastEditTime: 2020-09-21 16:57:29
+ * @LastEditTime: 2020-09-21 17:21:54
  * @LastEditors: Do not edit
  * @FilePath: /koa-router-module/app.js
  */
@@ -15,6 +15,7 @@ const koa = require('koa'),
 let app = new koa();
 let admin = require('./routes/admin');
 let api = require('./routes/api');
+let index = require('./routes/index');
 
 
 /**
@@ -29,11 +30,13 @@ art(app, {
 
 
     
-router.get('/',(ctx)=>{ 
-    // 渲染模板引擎
-    ctx.render('index')
-})
+// router.get('/',async(ctx)=>{ 
+//     // 渲染模板引擎
+//     ctx.render('index')
+// })
 
+// 模块化路由配置：配置 首页 下面的子路由
+router.use('/', index );
 
 // 模块化路由配置：配置 admin下面的子路由
 router.use('/admin',admin.routes());
