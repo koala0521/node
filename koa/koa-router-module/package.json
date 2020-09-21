@@ -1,0 +1,12 @@
+{
+  "name": "koa-router-module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "koa": "^2.13.0",
+    "koa-art-template": "^1.1.1",
+    "koa-router": "^9.4.0"
+  }
+}

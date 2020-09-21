@@ -1,0 +1,62 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-09-17 15:27:12
+ * @LastEditTime: 2020-09-21 15:15:15
+ * @LastEditors: Do not edit
+ * @FilePath: /koa/views/art_news.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table , th , td{
+            border: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <h3>art-template 模板引擎</h3>
+    
+    {{ user }}
+    
+    <hr> 
+    <h3>列表渲染</h3>
+
+    <div>
+        <a href="/add">添加数据</a>
+    </div>
+
+    <table class="table" >
+        <tr>
+            <th>序号</th>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>姓别</th>
+            <th>操作</th>
+        </tr>
+        {{each list }}
+
+            <tr>
+                <td>{{ $index+1 }}</td>
+                <td>{{ $value.id }}</td>
+                <td>{{ $value.username }}</td>
+                <td>{{ $value.age }}</td>
+                <td>{{ $value.sex }}</td>
+                <td>
+                    <a href="/edit?id={{@ $value._id }}">编辑</a>
+                    <a href="/delete?id={{@ $value._id }}">删除</a>
+                </td>
+            </tr>
+
+        {{/each}}
+    </table>
+
+    {{include './art_foot.html' }}
+    
+</body>
+</html>

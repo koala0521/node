@@ -1,0 +1,41 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-09-21 11:36:16
+ * @LastEditTime: 2020-09-21 15:01:28
+ * @LastEditors: Do not edit
+ * @FilePath: /koa/views/art_edit.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>修改信息</h3>
+    <form action="/doEdit" method="POST" >
+        <label for="">
+            <input type="hidden" name="_id" value="{{@ data._id }}" >
+        </label>
+        <br>        
+        <label for="">
+            姓名：
+            <input type="text" name="username" value="{{ data.username }}" >
+        </label>
+        <br>
+        <label for="">
+            年龄：
+            <input type="text" name="age" value="{{ data.age }}" >
+        </label>
+        <br>
+        <label for="">
+            性别：
+            <input type="text" name="sex" value="{{ data.sex }}" >
+        </label>
+        <br>
+        <button type="submit" >提交</button>
+    </form>
+</body>
+</html>
