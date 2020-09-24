@@ -954,6 +954,12 @@ only@~0.0.2:
   version "0.0.2"
   resolved "https://r.cnpmjs.org/only/download/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
 
+opentype.js@^0.7.3:
+  version "0.7.3"
+  resolved "https://r.cnpmjs.org/opentype.js/download/opentype.js-0.7.3.tgz#40fb8ce18bfd60e74448efdfe442834098397aab"
+  dependencies:
+    tiny-inflate "^1.0.2"
+
 optionator@^0.8.1:
   version "0.8.3"
   resolved "https://r.cnpmjs.org/optionator/download/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
@@ -1225,9 +1231,19 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svg-captcha@^1.4.0:
+  version "1.4.0"
+  resolved "https://r.cnpmjs.org/svg-captcha/download/svg-captcha-1.4.0.tgz#32ead3c6463936c218bb3bc9ed04fea4eeffe492"
+  dependencies:
+    opentype.js "^0.7.3"
+
 term-size@^2.1.0:
   version "2.2.0"
   resolved "https://r.cnpmjs.org/term-size/download/term-size-2.2.0.tgz#1f16adedfe9bdc18800e1776821734086fcc6753"
+
+tiny-inflate@^1.0.2:
+  version "1.0.3"
+  resolved "https://r.cnpmjs.org/tiny-inflate/download/tiny-inflate-1.0.3.tgz#122715494913a1805166aaf7c93467933eea26c4"
 
 to-readable-stream@^1.0.0:
   version "1.0.0"

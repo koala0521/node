@@ -8,7 +8,7 @@
 		<!-- basic styles -->
 
 		<link href="{{ __HOST__ }}/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="{{ __HOST__ }}//admin/assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="{{ __HOST__ }}/admin/assets/css/font-awesome.min.css" />
 
 		<!-- fonts -->
 		<link rel="stylesheet" href="{{ __HOST__ }}/admin/assets/css/ace.min.css" />
@@ -72,8 +72,8 @@
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="验证吗" style="width:200px;float:left;" name="yanzheng" />
-															<img style="float:right;" src="https://www.itying.com/koa/admin_express.php?m=Public&a=verify&rand=1521453067" alt="">
+															<input type="text" class="form-control" placeholder="验证吗" style="width:200px;float:left;" name="code" />
+															<img id="code" style="float:right;" src="{{ __ROOT__ }}/admin/login/code" alt="">
 														</span>
 													</label>
 
@@ -112,6 +112,16 @@
 
 		<!-- basic scripts -->
 
-	
+		<!-- 底部 -->
+		{{ include 'admin/public/footer.html' }}
+
+
+		<script>
+			// 获取验证码
+			$('#code').on('click',function(e){
+				$(this).attr('src',`{{ __ROOT__ }}/admin/login/code?t=${ Math.random() }`);
+			})
+		</script>
+
 </body>
 </html>

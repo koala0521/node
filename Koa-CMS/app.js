@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:32:35
- * @LastEditTime: 2020-09-23 18:03:38
+ * @LastEditTime: 2020-09-24 11:04:25
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/app.js
  */
@@ -48,14 +48,11 @@ router.use('/',async(ctx,next)=>{
 
     ctx.body = ctx.request.body;
 
-    console.log('ctx.url___' , ctx.url);
-
-
     // 判断登录状态
     if( !ctx.session.userinfo ){
 
         // 没有登录，去登陆页面
-        if( ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin' ){
+        if( ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin' || ctx.url === '/admin/login/code'){
 
             await next();
 
