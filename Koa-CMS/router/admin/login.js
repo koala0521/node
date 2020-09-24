@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-24 11:37:45
+ * @LastEditTime: 2020-09-24 14:50:43
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/login.js
  */
@@ -42,27 +42,36 @@ router.post('/doLogin',async(ctx)=>{
     })
 
     if( code.toLocaleLowerCase() !== ctx.session.code.toLocaleLowerCase() ){
-        
-        console.log('验证码错误~');
-        ctx.redirect('back');
+
+        ctx.render('admin/error',{
+            msg: '验证码错误~',
+            url: ctx.state.__HOST__ + '/admin/login'
+        });
         return
     }    
+    
 
     if( result.length ){
         
         console.log('登录成功');
         ctx.session.userinfo = result[0];
-        ctx.redirect( ctx.state.__HOST__ + '/admin' );        
-    }else{
+        ctx.redirect( ctx.state.__HOST__ + '/admin' );    
 
-        console.log('登录失败~');
-        
+    }else{
+        ctx.render('admin/error',{
+            msg: '账号或密码错误~',
+            url: ctx.state.__HOST__ + '/admin/login'
+        });        
     }
 
 })
 
 
+// 验证码
 router.get('/code',async(ctx)=>{
+
+    console.log('验证码');
+    
 
     var c = svgCaptcha.create({
         width: 120,
@@ -74,13 +83,20 @@ router.get('/code',async(ctx)=>{
         background: '#cc9966' // 验证码图片背景颜色
     
     });
-    console.log('c.text___' , c.text );
-    
+
     ctx.session.code = c.text;
     // 需要设置响应头
     ctx.response.type = 'image/svg+xml';
     ctx.body = c.data;
     
+})
+
+router.get('/logout',async(ctx)=>{
+
+    ctx.session.userinfo = null;
+
+    ctx.redirect(`${ ctx.state.__HOST__ }/admin/login/logout`);
+
 })
 
 

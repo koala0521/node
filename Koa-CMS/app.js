@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:32:35
- * @LastEditTime: 2020-09-24 11:04:25
+ * @LastEditTime: 2020-09-24 14:24:32
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/app.js
  */
@@ -41,27 +41,11 @@ app.use(bodyParser()); // 处理post请求参数
 
 router.use('/',async(ctx,next)=>{
     
-    // console.log('__ROOT__',ctx.state.__ROOT__ );
     
     // 模板引擎的全局变量
     ctx.state.__HOST__ = `http://` + ctx.request.header.host;
 
     ctx.body = ctx.request.body;
-
-    // 判断登录状态
-    if( !ctx.session.userinfo ){
-
-        // 没有登录，去登陆页面
-        if( ctx.url === '/admin/login' || ctx.url === '/admin/login/doLogin' || ctx.url === '/admin/login/code'){
-
-            await next();
-
-        }else{
-            ctx.redirect('/admin/login');
-
-        }
-        return
-    }
 
     await next();
 })

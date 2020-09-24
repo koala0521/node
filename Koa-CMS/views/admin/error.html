@@ -1,0 +1,45 @@
+<!--
+ * @Author: XueBaBa
+ * @Description: 文件描述~
+ * @Date: 2020-09-24 11:41:37
+ * @LastEditTime: 2020-09-24 12:07:41
+ * @LastEditors: Do not edit
+ * @FilePath: /Koa-CMS/views/admin/error.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3;url='{{ url }}'">
+    <title>Document</title>
+    <style>
+        #time{
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h3>提示：{{ msg }}</h3>
+    <p><span id="time" >11</span>秒之后返回...</p>
+
+
+    {{ include 'admin/public/footer.html' }}
+    <script>
+
+        let n = 3;
+        $('#time').html(n);
+        console.log( $('#time') );
+        
+        setInterval(() => {
+            --n;
+            $('#time').html(n < 1 ? 1 : n );
+        }, 1000);
+
+
+    </script>
+
+
+</body>
+</html>
