@@ -102,11 +102,16 @@
 											</td>
 											<td> {{ $value.age  }} </td>
 											<td class="hidden-480">{{ $value.sex }}</td>
-											<td>Feb 12</td>
+											<td>{{ $value.lastTime | dateFormat }}</td>
 	
 											<td class="hidden-480">
-													<button class="btn btn-xs btn-success">
-														<i class="icon-ok bigger-120 success"></i>
+													
+													<button class="btn btn-xs {{ $value.statu == 1 ? 'btn-success' : 'btn-danger' }}" onclick="app.toggle(this,'user','statu', {{ $value._id }} )" >
+														{{if $value.statu == 1 }} 					
+															<i class="icon-ok bigger-120 success"></i>
+														{{else}}				
+															<i class="icon-remove bigger-120 remove"></i>
+														{{/if}}
 													</button>
 											</td>
 	

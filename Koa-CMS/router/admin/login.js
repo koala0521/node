@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-24 14:50:43
+ * @LastEditTime: 2020-09-24 17:22:15
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/login.js
  */
@@ -15,12 +15,12 @@ const svgCaptcha = require('svg-captcha');
 router.get('/',async(ctx)=>{
 
     // 已登录时，跳转到首页
-    // if(ctx.session.userinfo){
+    if(ctx.session.userinfo){
 
-    //     ctx.redirect( ctx.state.__HOST__ + '/admin' );    
-    //     return
+        ctx.redirect( ctx.state.__HOST__ + '/admin' );    
+        return
         
-    // }
+    }
     await ctx.render('admin/login');
 })
 
@@ -55,9 +55,16 @@ router.post('/doLogin',async(ctx)=>{
         
         console.log('登录成功');
         ctx.session.userinfo = result[0];
+        
+        // 更新登录时间
+        DB.update('user',{ "_id": DB.getObjId(result[0]._id)},{
+            lastTime: new Date()
+        });
+
         ctx.redirect( ctx.state.__HOST__ + '/admin' );    
 
     }else{
+        
         ctx.render('admin/error',{
             msg: '账号或密码错误~',
             url: ctx.state.__HOST__ + '/admin/login'

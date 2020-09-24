@@ -2,13 +2,14 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-24 15:31:21
+ * @LastEditTime: 2020-09-24 17:18:48
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin.js
  */
 const router = require('koa-router')();
 const url = require('url');
 
+let index = require('./admin/index');
 let login = require('./admin/login');
 let manage = require('./admin/manage');
 
@@ -42,11 +43,7 @@ router.use('/',async(ctx,next)=>{
     await next();
 })
 
-router.get('/',async(ctx)=>{
-    await ctx.render('admin/index');
-})
-
-
+router.use(index);
 router.use('/login',login);
 router.use('/manage',manage);
 

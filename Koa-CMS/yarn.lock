@@ -736,6 +736,10 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
+koa-jsonp@^2.0.2:
+  version "2.0.2"
+  resolved "https://r.cnpmjs.org/koa-jsonp/download/koa-jsonp-2.0.2.tgz#4394214403facfd61d7df2466292c9fb0f6bf082"
+
 koa-router@^9.4.0:
   version "9.4.0"
   resolved "https://r.cnpmjs.org/koa-router/download/koa-router-9.4.0.tgz#7bd3cd4f6247256e4b56fbb2203bde3851acc15a"
@@ -1170,6 +1174,10 @@ setprototypeof@1.2.0:
 signal-exit@^3.0.2:
   version "3.0.3"
   resolved "https://r.cnpmjs.org/signal-exit/download/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
+
+silly-datetime@^0.1.2:
+  version "0.1.2"
+  resolved "https://r.cnpmjs.org/silly-datetime/download/silly-datetime-0.1.2.tgz#21978e8e8d8481616063ac112ff14693f06eb85b"
 
 source-map@^0.5.6:
   version "0.5.7"

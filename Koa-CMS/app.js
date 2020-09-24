@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:32:35
- * @LastEditTime: 2020-09-24 14:24:32
+ * @LastEditTime: 2020-09-24 17:22:07
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/app.js
  */
@@ -12,7 +12,9 @@ const path = require('path');
 const render = require('koa-art-template');
 const static = require('koa-static');
 const session = require('koa-session');
-var bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser');
+const sd = require('silly-datetime');
+const jsonp = require('koa-jsonp');
 
 let app = new koa();
 
@@ -32,19 +34,21 @@ const CONFIG = {
     sameSite: null,     
   };
 
+//   session 中间件
 app.use(session(CONFIG ,app));
 
+// 静态资源中间件
 app.use(static( __dirname + '/public'));
 
 app.use(bodyParser()); // 处理post请求参数
 
+// jsonp 中间件
+app.use(jsonp());
 
 router.use('/',async(ctx,next)=>{
     
-    
     // 模板引擎的全局变量
     ctx.state.__HOST__ = `http://` + ctx.request.header.host;
-
     ctx.body = ctx.request.body;
 
     await next();
@@ -53,6 +57,12 @@ router.use('/',async(ctx,next)=>{
 render(app, {
     root: path.join(__dirname, 'views'),
     extname: '.html',
+
+    // 扩展模板方法
+    dateFormat: dateFormat = function(val){
+        
+        return sd.format(new Date(val), 'YYYY-MM-DD HH:mm');
+    },
     debug: process.env.NODE_ENV !== 'production'
 });
 
