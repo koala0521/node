@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-28 11:57:41
+ * @LastEditTime: 2020-09-28 19:31:11
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/category.js
  */
@@ -15,7 +15,7 @@ router.get('/',async(ctx)=>{
 
     let result = await DB.find('category');
 
-    let list = tools.cateToList( 0 , result );
+    let list = tools.cateToList( result );
 
     await ctx.render('admin/category/list',{
         list
@@ -23,127 +23,141 @@ router.get('/',async(ctx)=>{
 
 })
 
+// 添加分类
 router.get('/add',async(ctx)=>{
-    
-    await ctx.render('admin/category/add')
+
+    let list = await DB.find('category',{"pid": "0"});
+
+    await ctx.render('admin/category/add' , {
+        list
+    })
 })
 
-// 添加用户
+// 添加分类
 router.post('/doAdd',async(ctx)=>{
 
     // 1. 获取表单数据
-    let { username, password, repassword } = ctx.request.body;
+    let data = ctx.request.body;
 
     // 2.验证数据合法性
-    if( !/^\w{5,12}$/.test(username) ){
-        console.log('用户名格式错误');
+    if( !/^[\u4e00-\u9fa5\w]{2,12}$/.test( data.title ) ){
         
         await ctx.render('admin/error',{
-            msg: '用户名格式错误~',
-            url: ctx.state.__HOST__ + '/admin/manage/add'
+            msg: '分类名格式错误~',
+            url: ctx.state.__HOST__ + '/admin/category/add'
         });          
         
         return
     }
 
-    if( !password || !repassword || password !== repassword || password.length < 6 ){
-
-        await ctx.render('admin/error',{
-            msg: '秘密错误~',
-            url: ctx.state.__HOST__ + '/admin/manage/add'
-        });   
-
-        return
-    }
-
     // 3.数据库查询有用户名是否存在
 
-    let result = await DB.find('user',{username});  
+    let result = await DB.find('category',{ "title": data.title });  
 
     if( result.length ){
 
         await ctx.render('admin/error',{
-            msg: '用户名已存在~',
-            url: ctx.state.__HOST__ + '/admin/manage/add'
+            msg: '分类已存在~',
+            url: ctx.state.__HOST__ + '/admin/category/add'
         });  
 
         return
     }
   
     // 4. 数据库增加数据
-    let state = await DB.insert('user',{
-        username, 
-        password: tools.md5(password),
-        sex: '测试',
-        age: Number.parseInt( Math.random()*100 )
+    let state = await DB.insert('category',{
+        title: data.title, 
+        description: data.description,
+        keywords: data.keywords,
+        state: data.state,
+        pid: data.pid,
+        add_time: new Date()
     });
     
-    ctx.redirect(`${ ctx.state.__HOST__ }/admin/manage`);
+    ctx.redirect(`${ ctx.state.__HOST__ }/admin/category`);
 
 })
 
 
 // 编辑用户
 router.get('/edit',async(ctx)=>{
-    console.log('edit');
 
     let { id } = ctx.query;
 
-    let result = await DB.find('user',{ "_id": DB.getObjId(id) });
+    let list = await DB.find('category',{"pid": "0"});  // 分类
 
-    await ctx.render('admin/manage/edit',{
-        info: result[0]
+    let result = await DB.find('category',{ "_id": DB.getObjId(id) });
+
+    await ctx.render('admin/category/edit',{
+        info: result[0],
+        list
     });
     
 })
 
-// 编辑用户
+// 编辑分类
 router.post('/doEdit',async(ctx)=>{
     
     // 1. 获取表单数据
-    let { username, password, repassword ,id } = ctx.request.body;
+    let data = ctx.request.body;
 
     // 2.验证数据合法性
-    if( !/^\w{5,12}$/.test(username) ){
-
+    if( !/^[\u4e00-\u9fa5\w]{2,12}$/.test( data.title ) ){
+        
         await ctx.render('admin/error',{
-            msg: '用户名格式错误~',
-            url: ctx.state.__HOST__ + '/admin/manage/edit?id=' + id
+            msg: '分类名格式错误~',
+            url: ctx.state.__HOST__ + '/admin/category/edit?id=' + data._id
         });          
         
         return
     }
 
-    if( !password || !repassword || password !== repassword || password.length < 6 ){
-
-        await ctx.render('admin/error',{
-            msg: '秘密错误~',
-            url: ctx.state.__HOST__ + '/admin/manage/edit?id=' + id
-        });   
-
-        return
-    }
-
-    // 3.数据库查询用户名是否存在
-    let result = await DB.find('user',{username});  
+    // 3.数据库查询有用户名是否存在
+    let result = await DB.find('category',{ "_id": DB.getObjId(data._id) });  
 
     if( !result.length ){
 
         await ctx.render('admin/error',{
-            msg: '账号或密码错误~',
-            url: ctx.state.__HOST__ + '/admin/manage/edit?id=' + id
+            msg: '分类不存在~',
+            url: ctx.state.__HOST__ + '/admin/category'
         });  
 
         return
-    }    
+    }
+  
     // 4. 数据库更新数据
-    let state = await DB.update('user',{ "_id": DB.getObjId(id) },{
-        username, 
-        password: tools.md5(password),
+    let state = await DB.update('category',{"_id": DB.getObjId(data._id) },{
+        title: data.title, 
+        description: data.description,
+        keywords: data.keywords,
+        state: data.state,
+        pid: data.pid
     });
+    if(state.result.ok == 1 ){
+        console.log(`修改成功~`);
+    }else{
+        console.log(`修改失败~`);
+    }
     
-    ctx.redirect(`${ ctx.state.__HOST__ }/admin/manage`);
+    ctx.redirect(`${ ctx.state.__HOST__ }/admin/category`);
+
 })
 
+
+// 删除分类
+
+router.get('/delete',async(ctx)=>{
+
+    let { id } = ctx.query;
+
+    // let result = DB.remove('category',{"_id": DB.getObjId(id) });
+
+    console.log('=============result=======================');
+    console.log( id );
+    console.log('==============result======================');
+
+    ctx.body = `删除分类`;
+    
+})
 
 module.exports = router.routes();
