@@ -2,9 +2,9 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-27 15:48:00
+ * @LastEditTime: 2020-09-28 11:57:41
  * @LastEditors: Do not edit
- * @FilePath: /Koa-CMS/router/admin/manage.js
+ * @FilePath: /Koa-CMS/router/admin/category.js
  */
 
 const router = require('koa-router')();
@@ -13,16 +13,19 @@ const tools = require('../../module/tools');
 
 router.get('/',async(ctx)=>{
 
-    let result = await DB.find('user');
+    let result = await DB.find('category');
 
-    await ctx.render('admin/manage/list',{
-        list: result
+    let list = tools.cateToList( 0 , result );
+
+    await ctx.render('admin/category/list',{
+        list
     });
 
 })
 
 router.get('/add',async(ctx)=>{
-    await ctx.render('admin/manage/add')
+    
+    await ctx.render('admin/category/add')
 })
 
 // 添加用户

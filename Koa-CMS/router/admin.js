@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-24 17:18:48
+ * @LastEditTime: 2020-09-27 18:12:09
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin.js
  */
@@ -12,12 +12,11 @@ const url = require('url');
 let index = require('./admin/index');
 let login = require('./admin/login');
 let manage = require('./admin/manage');
+let category = require('./admin/category');
 
 router.use('/',async(ctx,next)=>{
 
     let parh = url.parse(ctx.url);
-
-    console.log('pathArr___' ,  ctx.url.substr(1).split('/') );
     
     // 保存用户信息
     ctx.state.G = {
@@ -46,6 +45,7 @@ router.use('/',async(ctx,next)=>{
 router.use(index);
 router.use('/login',login);
 router.use('/manage',manage);
+router.use('/category',category);
 
 
 module.exports = router.routes();
