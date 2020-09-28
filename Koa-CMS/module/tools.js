@@ -2,33 +2,39 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 17:19:29
- * @LastEditTime: 2020-09-28 11:09:46
+ * @LastEditTime: 2020-09-28 15:12:10
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/module/tools.js
  */
 
 const md5 = require('md5');
 
-function findChildren( id ,data){
+function formatList( id , data ){
 
-    let list = data.filter( el => {
-        return el.pid == id
-    });
+    let list = findChildrenById( id , data );
 
     list.forEach( el =>{
         
-        el.list = findChildren( el._id ,  data ) || []; 
+        el.list = formatList( el._id ,  data ) || []; 
     })      
 
     return list
 }
 
+function findChildrenById( id , data ){
+
+    return data.filter( el => {
+        return el.pid == id
+    })
+}
+
 const tools = {
     md5,
-    cateToList: function( id , data ){
+    cateToList: function( data ){
         
-        return findChildren( id , data );
-    }
+        return formatList( 0 , data );
+    },
+    findChildrenById
 }
 
 module.exports = tools;

@@ -89,8 +89,8 @@
 	
 											<td class="hidden-480">
 													
-													<button class="btn btn-xs {{ $value.statu == 1 ? 'btn-success' : 'btn-danger' }}" onclick="app.toggle(this,'user','statu', {{ $value._id }} )" >
-														{{if $value.statu == 1 }} 					
+													<button class="btn btn-xs {{ $value.state == 1 ? 'btn-success' : 'btn-danger' }}" onclick="app.toggle(this,'user','state', {{ $value._id }} )" >
+														{{if $value.state == 1 }} 					
 															<i class="icon-ok bigger-120 success"></i>
 														{{else}}				
 															<i class="icon-remove bigger-120 remove"></i>
@@ -101,14 +101,13 @@
 											<td>
 												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group center">
 													
-													<a href="{{ __HOST__ }}/admin/manage/edit?id={{ $value._id.toString() }}">
+													<a href="{{ __HOST__ }}/admin/category/edit?id={{@ $value._id }}">
 														<button class="btn btn-xs btn-info">
 															<i class="icon-edit bigger-120"></i>
 														</button>														
 													</a>
 
-													&nbsp;
-													<a href="{{ __HOST__ }}/admin/manage/delete?id={{ $value._id }}">
+													<a href="{{ __HOST__ }}/admin/category/delete?id={{@ $value._id }}">
 														<button class="btn btn-xs btn-danger">
 															<i class="icon-trash bigger-120"></i>
 														</button>														
@@ -130,8 +129,8 @@
 		
 												<td class="hidden-480">
 														
-														<button class="btn btn-xs {{ $value.statu == 1 ? 'btn-success' : 'btn-danger' }}" onclick="app.toggle(this,'user','statu', {{ $value._id }} )" >
-															{{if $value.statu == 1 }} 					
+														<button class="btn btn-xs {{ $value.state == 1 ? 'btn-success' : 'btn-danger' }}" onclick="app.toggle(this,'user','state', {{ $value._id }} )" >
+															{{if $value.state == 1 }} 					
 																<i class="icon-ok bigger-120 success"></i>
 															{{else}}				
 																<i class="icon-remove bigger-120 remove"></i>
@@ -142,14 +141,14 @@
 												<td>
 													<div class="visible-md visible-lg hidden-sm hidden-xs btn-group center">
 														
-														<a href="{{ __HOST__ }}/admin/manage/edit?id={{ $value._id.toString() }}">
+														<a href="{{ __HOST__ }}/admin/category/edit?id={{ $value._id.toString() }}">
 															<button class="btn btn-xs btn-info">
 																<i class="icon-edit bigger-120"></i>
 															</button>														
 														</a>
 
 														&nbsp;
-														<a href="{{ __HOST__ }}/admin/manage/delete?id={{ $value._id }}">
+														<a href="{{ __HOST__ }}/admin/category/delete?id={{@ $value._id }}">
 															<button class="btn btn-xs btn-danger">
 																<i class="icon-trash bigger-120"></i>
 															</button>														
