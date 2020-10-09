@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-28 19:31:11
+ * @LastEditTime: 2020-09-30 14:16:03
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/category.js
  */
@@ -150,11 +150,22 @@ router.get('/delete',async(ctx)=>{
 
     let { id } = ctx.query;
 
-    // let result = DB.remove('category',{"_id": DB.getObjId(id) });
+    let result = await DB.remove('category',{"_id": DB.getObjId(id) });
 
-    console.log('=============result=======================');
-    console.log( id );
-    console.log('==============result======================');
+
+    if( result.result.ok == 1 ){
+
+        ctx.redirect(ctx.state.__HOST__ + '/admin/category')
+
+    }else{
+
+        console.log(`删除失败`);
+        await ctx.render('admin/error',{
+            msg: '分类删除失败~',
+            url: ctx.state.__HOST__ + '/admin/category'
+        });  
+
+    }
 
     ctx.body = `删除分类`;
     

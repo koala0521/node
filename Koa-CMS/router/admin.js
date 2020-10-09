@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-09-27 18:12:09
+ * @LastEditTime: 2020-10-09 15:50:49
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin.js
  */
@@ -21,7 +21,8 @@ router.use('/',async(ctx,next)=>{
     // 保存用户信息
     ctx.state.G = {
         userinfo: ctx.session.userinfo,
-        pathArr: ctx.url.substr(1).split('/')
+        pathArr: ctx.url.substr(1).split('/'),
+        prePage: ctx.request.headers['referer']
     }
 
     // 判断登录状态
