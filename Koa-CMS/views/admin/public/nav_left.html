@@ -94,7 +94,7 @@
             </ul>
         </li>
 
-        <li class="{{ G.pathArr[0] === 'admin' && G.pathArr[1] === '2' ? 'active open' : '' }}" >
+        <li class="{{ G.pathArr[0] === 'admin' && G.pathArr[1] === 'article' ? 'active open' : '' }}" >
             <a href="#" class="dropdown-toggle">
                 <i class="icon-edit"></i>
                 <span class="menu-text"> 内容管理 </span>
@@ -103,17 +103,17 @@
             </a>
 
             <ul class="submenu">
-                <li>
-                    <a href="form-elements.html">
+                <li class="{{ G.pathArr[1] === 'article' && !G.pathArr[2] ? 'active' : '' }}">
+                    <a href="{{ __ROOT__ }}/admin/article">
                         <i class="icon-double-angle-right"></i>
-                        内容列表
+                        分类列表
                     </a>
                 </li>
 
-                <li>
-                    <a href="form-wizard.html">
+                <li class="{{ G.pathArr[1] === 'article' && G.pathArr[2]=='add' ? 'active' : '' }}">
+                    <a href="{{ __ROOT__ }}/admin/article/add">
                         <i class="icon-double-angle-right"></i>
-                         增加内容
+                        增加分类
                     </a>
                 </li>
                 

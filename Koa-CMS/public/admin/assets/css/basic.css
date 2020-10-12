@@ -1,3 +1,20 @@
 .form-horizontal .form-group{
     height: 44px;
 }
+
+.table-responsive{
+
+    height: 500px;
+}
+
+/* #sample-table-1{
+
+    height: 100%;
+} */
+
+#page{
+
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}

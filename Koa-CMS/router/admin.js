@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-10-09 15:50:49
+ * @LastEditTime: 2020-10-10 17:52:46
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin.js
  */
@@ -13,6 +13,7 @@ let index = require('./admin/index');
 let login = require('./admin/login');
 let manage = require('./admin/manage');
 let category = require('./admin/category');
+let article = require('./admin/article');
 
 router.use('/',async(ctx,next)=>{
 
@@ -47,6 +48,7 @@ router.use(index);
 router.use('/login',login);
 router.use('/manage',manage);
 router.use('/category',category);
+router.use('/article',article);
 
 
 module.exports = router.routes();

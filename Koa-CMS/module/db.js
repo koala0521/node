@@ -2,14 +2,15 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-18 11:33:14
- * @LastEditTime: 2020-09-21 14:46:04
+ * @LastEditTime: 2020-10-12 12:22:51
  * @LastEditors: Do not edit
- * @FilePath: /koa/module/db.js
+ * @FilePath: /Koa-CMS/module/db.js
  */
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjId = require('mongodb').ObjectID;
 
+const { resolve } = require('url');
 const Config = require('./config');
 
 class Db{
@@ -56,12 +57,22 @@ class Db{
 
     }
 
-    find(cName,opt){
+    /**
+     * 
+     * @param {string} cName 表名称
+     * @param {object} opt 查询条件
+     * @param {object} attr 查询字段
+     * @param {number} page  页码
+     * @param {number} size 每页最多返回数据量
+     */     
+    find(cName, opt={}, attr={}, page=1, size=0){
+
+        let skipCount = (page-1)*size;
 
         return new Promise((resolve,reject)=>{
-            this.connect().then((db)=>{
-            
-                let result = db.collection(cName).find(opt).toArray((err,data)=>{
+            this.connect().then(db=>{
+                
+                db.collection(cName).find(opt,{"fields":attr}).skip(skipCount).limit(size).toArray((err,data)=>{
                     if(err){
                         console.log('err',err);
                         reject(err);
@@ -135,6 +146,23 @@ class Db{
             })
         })           
     }
+
+    count(cName,opt){
+        
+        return new Promise((resolve,reject)=>{
+            this.connect().then(db=>{
+                db.collection(cName).count(opt,(err,result)=>{
+                    if( err ){
+                        console.log('err__' , err);
+                        reject(err);
+                        return
+                    }
+
+                    resolve(result)
+                })
+            })
+        })   
+    }    
 
     getObjId(id){
         return new ObjId(id)
