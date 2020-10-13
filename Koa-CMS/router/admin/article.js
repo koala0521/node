@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-10-13 10:42:12
+ * @LastEditTime: 2020-10-13 17:30:13
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/article.js
  */
@@ -13,18 +13,14 @@ const tools = require('../../module/tools');
 
 const multer = require('@koa/multer');
 
-
 // 磁盘存储引擎 (DiskStorage)
-
 // 磁盘存储引擎可以让你控制文件的存储。
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/upload')
   },
   filename: function (req, file, cb) {
-      console.log('====================================');
-      console.log( file );
-      console.log('====================================');
 
     //   获取图片后缀名
       let arr = file.originalname.split('.');
@@ -33,8 +29,9 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + '.' + mime )
   }
 })
-
 const upload = multer({ storage: storage });
+
+// 磁盘存储引擎 (DiskStorage)
 
 
 router.get('/',async(ctx)=>{
@@ -49,7 +46,8 @@ router.get('/',async(ctx)=>{
     await ctx.render('admin/article/list',{
         list,
         page: page || 1,
-        pageCount: Math.ceil( count / size )
+        pageCount: Math.ceil( count / size ),
+        // content: ''  // 富文本内容
     });
 
 })
