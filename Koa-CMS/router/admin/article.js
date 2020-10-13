@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-10-12 12:27:37
+ * @LastEditTime: 2020-10-13 10:42:12
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/article.js
  */
@@ -11,6 +11,30 @@ const router = require('koa-router')();
 const DB = require('../../module/db').myDb;
 const tools = require('../../module/tools');
 
+const multer = require('@koa/multer');
+
+
+// 磁盘存储引擎 (DiskStorage)
+
+// 磁盘存储引擎可以让你控制文件的存储。
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/upload')
+  },
+  filename: function (req, file, cb) {
+      console.log('====================================');
+      console.log( file );
+      console.log('====================================');
+
+    //   获取图片后缀名
+      let arr = file.originalname.split('.');
+      let mime = arr[ arr.length-1 ];
+
+    cb(null, Date.now() + '.' + mime )
+  }
+})
+
+const upload = multer({ storage: storage });
 
 
 router.get('/',async(ctx)=>{
@@ -24,7 +48,7 @@ router.get('/',async(ctx)=>{
 
     await ctx.render('admin/article/list',{
         list,
-        page: page,
+        page: page || 1,
         pageCount: Math.ceil( count / size )
     });
 
@@ -40,50 +64,66 @@ router.get('/add',async(ctx)=>{
     })
 })
 
-// 添加分类
-router.post('/doAdd',async(ctx)=>{
 
-    // 1. 获取表单数据
-    let data = ctx.request.body;
+router.post( '/doAdd',upload.single('avatar'), async(ctx) => {
 
-    // 2.验证数据合法性
-    if( !/^[\u4e00-\u9fa5\w]{2,12}$/.test( data.title ) ){
-        
-        await ctx.render('admin/error',{
-            msg: '分类名格式错误~',
-            url: ctx.state.__HOST__ + '/admin/article/add'
-        });          
-        
-        return
-    }
-
-    // 3.数据库查询有用户名是否存在
-
-    let result = await DB.find('article',{ "title": data.title });  
-
-    if( result.length ){
-
-        await ctx.render('admin/error',{
-            msg: '分类已存在~',
-            url: ctx.state.__HOST__ + '/admin/article/add'
-        });  
-
-        return
-    }
-  
-    // 4. 数据库增加数据
-    let state = await DB.insert('article',{
-        title: data.title, 
-        description: data.description,
-        keywords: data.keywords,
-        state: data.state,
-        pid: data.pid,
-        add_time: new Date()
-    });
+    // console.log('ctx.request.file', ctx.request.file);
+    // console.log('ctx.file', ctx.file);
+    // console.log('ctx.request.body', ctx.request.body);
     
+    
+    // ctx.body = 'upload';
+
+
     ctx.redirect(`${ ctx.state.__HOST__ }/admin/article`);
 
-})
+});
+
+
+// 添加分类
+// router.post('/doAdd',async(ctx)=>{
+
+//     // 1. 获取表单数据
+//     let data = ctx.request.body;
+
+//     // 2.验证数据合法性
+//     if( !/^[\u4e00-\u9fa5\w]{2,12}$/.test( data.title ) ){
+        
+//         await ctx.render('admin/error',{
+//             msg: '分类名格式错误~',
+//             url: ctx.state.__HOST__ + '/admin/article/add'
+//         });          
+        
+//         return
+//     }
+
+//     // 3.数据库查询有用户名是否存在
+
+//     let result = await DB.find('article',{ "title": data.title });  
+
+//     if( result.length ){
+
+//         await ctx.render('admin/error',{
+//             msg: '分类已存在~',
+//             url: ctx.state.__HOST__ + '/admin/article/add'
+//         });  
+
+//         return
+//     }
+  
+//     // 4. 数据库增加数据
+//     let state = await DB.insert('article',{
+//         title: data.title, 
+//         description: data.description,
+//         keywords: data.keywords,
+//         state: data.state,
+//         pid: data.pid,
+//         add_time: new Date()
+//     });
+    
+//     ctx.redirect(`${ ctx.state.__HOST__ }/admin/article`);
+
+// })
 
 
 // 编辑用户
