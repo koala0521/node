@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-10-13 17:27:19
+ * @LastEditTime: 2020-10-29 11:25:07
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin.js
  */
@@ -18,7 +18,7 @@ let category = require('./admin/category');
 let article = require('./admin/article');
 
 
-// 百度富文本编辑器 上传路由
+// 百度富文本编辑器 图片上传路由
 router.all(
     '/editor/controller', 
     ueditor([ 

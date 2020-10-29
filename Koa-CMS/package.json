@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "serve": "nodemon app.js"
+  },  
   "dependencies": {
     "@koa/multer": "^3.0.0",
     "art-template": "^4.13.2",
