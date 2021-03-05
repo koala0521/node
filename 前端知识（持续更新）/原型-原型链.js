@@ -2,9 +2,9 @@
  * @Author: 子非鱼
  * @Description: 文件描述~
  * @Date: 2021-03-05 17:31:50
- * @LastEditTime: 2021-03-05 18:15:30
+ * @LastEditTime: 2021-03-05 19:19:20
  * @LastEditors: Do not edit
- * @FilePath: /前端知识（持续更新）/原型-原型链.js
+ * @FilePath: /node学习/前端知识（持续更新）/原型-原型链.js
  */
 
 
@@ -21,9 +21,13 @@
  * 
  * 3. 继承
  * 
+ * 继承 https://zhuanlan.zhihu.com/p/110175302
+ * 
  * 用构造函数和原型链的混合模式去实现继承，避免对象共享可以参考经典的extend()函数，
  * 
  * 就是用一个空函数当做中间变量
+ * 
+ * 
  * 
  * 
  * */ 
