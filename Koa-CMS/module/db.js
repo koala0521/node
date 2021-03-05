@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-18 11:33:14
- * @LastEditTime: 2020-10-12 12:22:51
+ * @LastEditTime: 2020-11-10 11:41:52
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/module/db.js
  */
@@ -10,11 +10,10 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjId = require('mongodb').ObjectID;
 
-const { resolve } = require('url');
+// const { resolve } = require('url');
 const Config = require('./config');
 
 class Db{
-
 
     constructor(){
         this.dbClinet = null;

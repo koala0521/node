@@ -2,7 +2,7 @@
  * @Author: XueBaBa
  * @Description: 文件描述~
  * @Date: 2020-09-23 10:40:34
- * @LastEditTime: 2020-10-29 11:22:29
+ * @LastEditTime: 2020-11-02 18:32:08
  * @LastEditors: Do not edit
  * @FilePath: /Koa-CMS/router/admin/article.js
  */
@@ -65,8 +65,6 @@ router.get('/add',async(ctx)=>{
 
 router.post( '/doAdd',upload.single('avatar'), async(ctx) => {
 
-    // console.log('ctx.request.file', ctx.request.file);
-    // console.log('ctx.file', ctx.file);
     console.log('ctx.request.body', ctx.request.body);
     
     ctx.redirect(`${ ctx.state.__HOST__ }/admin/article`);

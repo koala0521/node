@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "serve": "nodemon app.js"
-  },  
+  },
   "dependencies": {
     "@koa/multer": "^3.0.0",
+    "@vue/cli": "^4.5.8",
     "art-template": "^4.13.2",
     "koa": "^2.13.0",
     "koa-art-template": "^1.1.1",
